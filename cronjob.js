@@ -6,6 +6,7 @@ import _ from "lodash";
 
 const botNatriDiscordUser = new DiscordUser(process.env.DISCORD_TOKEN);
 
+let isFetching = false;
 export async function initCron() {
   console.log("initCron");
 
@@ -13,7 +14,16 @@ export async function initCron() {
     console.log("discord connected");
     new CronJob(
       "0 * * * * *",
-      fetchSteamAssets,
+      async function () {
+        if (isFetching) {
+          return;
+        }
+        isFetching = true;
+        try {
+          await fetchSteamAssets();
+        } catch (e) {}
+        isFetching = false;
+      },
       null,
       true,
       "Asia/Ho_Chi_Minh",
