@@ -40,9 +40,7 @@ export async function fetchSteamAssetPrice(asset) {
     asset.market_hash_name,
   );
 
-  if (price?.lowest_price) {
-    console.log(price.lowest_price);
-  }
+    console.log(price);
 
   if (
     price?.success !== true ||
