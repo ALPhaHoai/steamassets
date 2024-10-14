@@ -13,7 +13,7 @@ export async function initCron() {
   botNatriDiscordUser.init(function () {
     console.log("discord connected");
     new CronJob(
-      "0 */2 * * * *",
+      "0 */5 * * * *",
       async function () {
         if (isFetching) {
           return;
