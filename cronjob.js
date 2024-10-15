@@ -1,8 +1,7 @@
-import { CronJob } from "cron";
+import {CronJob} from "cron";
 import SteamUser from "steamutils";
 import DiscordUser from "discord-control";
-import { sleep } from "steamutils/utils.js";
-import _ from "lodash";
+import {sleep} from "steamutils/utils.js";
 
 const botNatriDiscordUser = new DiscordUser(process.env.DISCORD_TOKEN);
 
@@ -15,6 +14,10 @@ export async function initCron() {
     new CronJob(
       "0 */10 * * * *",
       async function () {
+        if (isFetching) {
+          return;
+        }
+        await sleep(Math.floor(Math.random() * 60) + 1)
         if (isFetching) {
           return;
         }
